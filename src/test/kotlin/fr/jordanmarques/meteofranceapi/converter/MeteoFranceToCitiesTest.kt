@@ -1,21 +1,24 @@
-package fr.jordanmarques.meteofranceapi.meteofranceapi.converter
+package fr.jordanmarques.meteofranceapi.converter
 
-import fr.jordanmarques.meteofranceapi.meteofranceapi.service.*
+import fr.jordanmarques.meteofranceapi.service.City
+import fr.jordanmarques.meteofranceapi.service.Temperature
+import fr.jordanmarques.meteofranceapi.service.Lieu
+import fr.jordanmarques.meteofranceapi.service.MeteoFrance
+import fr.jordanmarques.meteofranceapi.service.Prevision
+import fr.jordanmarques.meteofranceapi.service.PrevisionLieux
+import io.mockk.MockKAnnotations
+import io.mockk.impl.annotations.InjectMockKs
 import org.junit.Before
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.mockito.InjectMocks
-import org.mockito.MockitoAnnotations
 
 class MeteoFranceToCitiesTest {
 
-    @InjectMocks
+    @InjectMockKs
     lateinit var meteoFranceToCities: MeteoFranceToCities
 
     @Before
-    fun init() {
-        MockitoAnnotations.initMocks(this)
-    }
+    fun init() = MockKAnnotations.init(this)
 
     @Test
     fun `should convert api result to internal object`() {
@@ -34,8 +37,8 @@ class MeteoFranceToCitiesTest {
         )
 
         var cities = arrayListOf(
-                City(name = "Ajaccio", lastUpdate = "09h12", temperature = Temperature(actual = 20, min = 17, max = 23)),
-                City(name = "Tours", lastUpdate = "09h12", temperature = Temperature(actual = 17, min = 13, max = 22))
+                City(name = "Ajaccio", lastUpdate = "09h12", temperature = Temperature(actual = 20, min = 17, max = 23), temps = "Éclaircies"),
+                City(name = "Tours", lastUpdate = "09h12", temperature = Temperature(actual = 17, min = 13, max = 22), temps = "Risque d'orages")
         )
 
         var result = meteoFranceToCities.convert(meteoFranceApiReturn)

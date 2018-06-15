@@ -1,4 +1,4 @@
-package fr.jordanmarques.meteofranceapi.meteofranceapi
+package fr.jordanmarques.meteofranceapi
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
